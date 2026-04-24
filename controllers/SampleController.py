@@ -1,5 +1,4 @@
-from SampleDAO import SampleDAO
-
+from database.SampleDAO import SampleDAO
 
 class SampleController:
 
