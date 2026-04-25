@@ -92,22 +92,22 @@ class User:
   
 # ── Helper: create the right subclass from a database row ─────
 
-    @staticmethod
-    def create_user_from_row(row) -> 'User':
+    @classmethod
+    def from_row(cls, row):
         """
-        Factory function — reads the role from the row and returns
-        the correct subclass (Admin or Technician).
+        Factory method to create a User (or subclass) from a database row.
+        'cls' ensures that if Admin.from_row is called, an Admin is returned.
         """
         if row is None:
             return None
-            
-        role = row["role"]
-        if role == "Admin":
-            return Admin.from_row(row)
-        elif role == "Technician":
-            return Technician.from_row(row)
-        else:
-            return User.from_row(row)
+        return cls(
+            user_id=row["user_id"],
+            username=row["username"],
+            password=row["password"],
+            role=row["role"]
+        )
+
+
     # ── String representations ─────────────────
 
     def __str__(self) -> str:
