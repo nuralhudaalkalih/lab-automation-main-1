@@ -7,18 +7,9 @@ class Technician(User):
         Same method name, different behaviour depending on the type — that's polymorphism.
     """
 
-    def __init__(self, user_id: int, username: str, password: str):
+    def __init__(self, user_id: int, username: str, password: str, role: str ="Technician"):
         super().__init__(user_id, username, password, role="Technician")
 
-    @classmethod
-    def from_row(cls, row):
-        if row is None:
-            return None
-        return cls(
-            user_id  = row["user_id"],
-            username = row["username"],
-            password = row["password"]
-        )
 
     def can_add_samples(self) -> bool:
         return True

@@ -11,7 +11,7 @@ class Admin(User):
         super().__init__(...) calls User's __init__ to set the shared attributes.
     """
 
-    def __init__(self, user_id: int, username: str, password: str):
+    def __init__(self, user_id: int, username: str, password: str, role: str ="Admin"):
         """
         CONCEPT — super().__init__():
             Calls the parent (User) constructor. We hardcode role="Admin"
@@ -19,16 +19,6 @@ class Admin(User):
         """
         super().__init__(user_id, username, password, role="Admin")
 
-    @classmethod
-    def from_row(cls, row):
-        """Factory method — same pattern as User.from_row."""
-        if row is None:
-            return None
-        return cls(
-            user_id  = row["user_id"],
-            username = row["username"],
-            password = row["password"]
-        )
 
     # Admin-only capabilities
     def can_manage_users(self) -> bool:

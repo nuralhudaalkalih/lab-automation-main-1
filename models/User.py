@@ -90,24 +90,6 @@ class User:
         return self.password == entered_password
 
   
-# ── Helper: create the right subclass from a database row ─────
-
-    @classmethod
-    def from_row(cls, row):
-        """
-        Factory method to create a User (or subclass) from a database row.
-        'cls' ensures that if Admin.from_row is called, an Admin is returned.
-        """
-        if row is None:
-            return None
-        return cls(
-            user_id=row["user_id"],
-            username=row["username"],
-            password=row["password"],
-            role=row["role"]
-        )
-
-
     # ── String representations ─────────────────
 
     def __str__(self) -> str:
