@@ -74,3 +74,8 @@ class AuthController:
             return False
 
         return self.dao.delete_user(username)
+    
+    # ── GET ALL USERS ─────────────────────
+    
+    def get_all_users(self):
+        return self.dao.get_all_users()
