@@ -12,7 +12,7 @@ from gui.DashboardWindow import DashboardWindow
 from gui.SampleForm import SampleForm
 from gui.ResultForm import ResultForm
 from gui.ManageUsersForm import ManageUsersForm
-from gui.ReportForm import ReportForm   # 🔥 جديد
+from gui.ReportForm import ReportForm   
 
 # ── DB + CONTROLLERS ──
 db = DatabaseManager()
@@ -109,7 +109,7 @@ def open_reports():
 
 # ── MANAGE USERS ──
 def open_manage_users():
-    if current_user["role"] != "Admin":
+    if current_user.role != "Admin":
         return
 
     clear()

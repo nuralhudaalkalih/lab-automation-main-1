@@ -75,7 +75,8 @@ class AuthController:
 
         return self.dao.delete_user(username)
     
-    # ── GET ALL USERS ─────────────────────
-    
+# ── GET ALL USERS ─────────────────────
     def get_all_users(self):
-        return self.dao.get_all_users()
+        rows = self.dao.get_all_users()
+        # Ensure we return User objects, not just database rows
+        return [User.from_row(row) for row in rows]
