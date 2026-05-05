@@ -4,6 +4,12 @@ from models.Result import Result
 
 class ReportController:
 
+    def add_result(self, sample_id: str, test_id: int, value: str) -> bool:
+        if not sample_id or test_id <= 0 or not value:
+            return False
+
+        return self.dao.add_result(sample_id, test_id, value)
+
     def __init__(self, db_manager):
         self.dao = ResultDAO(db_manager)
 
