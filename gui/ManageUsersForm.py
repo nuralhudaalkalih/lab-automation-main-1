@@ -83,7 +83,7 @@ class ManageUsersForm:
 
         for u in users:
             self.tree.insert("", "end",
-                             values=(u["username"], u["role"]))
+                             values=(u.username, u.role))
 
     # ── DELETE USER ──
     def delete(self):

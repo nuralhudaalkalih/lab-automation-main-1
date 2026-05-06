@@ -16,7 +16,8 @@ class DashboardWindow:
                  bg="#A8A8AD").grid(row=0, column=0, columnspan=2, pady=20)
 
         tk.Label(frame,
-                 text=f"Welcome {user['username']} ({user['role']})",
+                #text=f"Welcome {user['username']} ({user['role']})",
+                 text=f"Welcome {user.username} ({user.role})",
                  font=("Arial", 25),
                  bg="#A8A8AD").grid(row=1, column=0, columnspan=2, pady=10)
 
@@ -42,7 +43,7 @@ class DashboardWindow:
         tk.Button(frame, text="Reports", width=20, font=("Arial", 18),
                   command=open_reports).grid(row=5, column=0, pady=10,padx=10)
 
-        if user["role"] == "Admin":
+        if user.role == "Admin":
             tk.Button(frame, text="Manage Users", width=20, font=("Arial", 18),
                       command=open_manage_users).grid(row=5, column=1,padx=10)
 

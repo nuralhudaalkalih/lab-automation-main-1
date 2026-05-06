@@ -1,4 +1,5 @@
 import sqlite3
+import os
 class DatabaseManager:
     def __init__(self, db_path="lab.db"):
         self.db_path = db_path

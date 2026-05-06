@@ -1,4 +1,6 @@
 from database.TestDAO import TestDAO
+from models.Test import Test
+
 
 class TestController:
 
@@ -8,6 +10,7 @@ class TestController:
     # ── CREATE ────────────────────────────────
 
     def add_test(self, test_name: str, description: str = "") -> int:
+
         if not test_name:
             raise ValueError("Test name cannot be empty")
 
@@ -19,32 +22,41 @@ class TestController:
     # ── READ ──────────────────────────────────
 
     def get_test_by_id(self, test_id: int):
+
         if test_id <= 0:
             return None
 
-        return self.dao.get_by_id(test_id)
+        row = self.dao.get_by_id(test_id)
+        return Test.from_row(row)
 
     def get_test_by_name(self, test_name: str):
+
         if not test_name:
             return None
 
-        return self.dao.get_by_name(test_name)
+        row = self.dao.get_by_name(test_name)
+        return Test.from_row(row)
 
     def get_all_tests(self):
-        return self.dao.get_all_tests()
+
+        rows = self.dao.get_all_tests()
+        return [Test.from_row(row) for row in rows]
 
     def get_test_names(self):
         return self.dao.get_test_names()
 
     def search_tests(self, query: str):
+
         if not query:
             return []
 
-        return self.dao.search_tests(query)
+        rows = self.dao.search_tests(query)
+        return [Test.from_row(row) for row in rows]
 
     # ── UPDATE ────────────────────────────────
 
     def update_test(self, test_id: int, test_name: str, description: str) -> bool:
+
         if test_id <= 0:
             return False
 
@@ -56,6 +68,7 @@ class TestController:
     # ── DELETE ────────────────────────────────
 
     def delete_test(self, test_id: int) -> bool:
+
         if test_id <= 0:
             return False
 

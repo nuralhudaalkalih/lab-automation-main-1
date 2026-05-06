@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# lab-automation
-=======
 # Laboratory Automation and Sample Management System (LASMS)
 
 A desktop application built with Python, Tkinter, and SQLite for managing laboratory samples, test assignments, and patient results. Developed as a group project for the Database and Python Programming course.
@@ -374,4 +371,4 @@ The following tests are automatically available on first run:
 | Hormone | TSH, T3, T4, Insulin |
 
 Admins can add additional tests at any time through the application.
->>>>>>> 58876c25902238da79693188d9d53bf00ad62fac
+
