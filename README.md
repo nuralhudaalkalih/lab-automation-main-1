@@ -370,5 +370,5 @@ The following tests are automatically available on first run:
 | Viral / Swab | COVID-19 PCR, Rapid Antigen, Influenza A/B |
 | Hormone | TSH, T3, T4, Insulin |
 
-Admins can add additional tests at any time through the application.
+
 
