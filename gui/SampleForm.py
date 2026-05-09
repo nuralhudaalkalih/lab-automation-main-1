@@ -29,10 +29,11 @@ class SampleForm:
         self.filter_combo.grid(row=4, column=1, pady=5)
 
         # ── TABLE ──
-        self.tree = ttk.Treeview(frame, columns=("id","name","status"), show="headings")
+        self.tree = ttk.Treeview(frame, columns=("id","name","status","date"), show="headings")
         self.tree.heading("id", text="ID")
         self.tree.heading("name", text="Patient")
         self.tree.heading("status", text="Status")
+        self.tree.heading("date",text="Date")
         self.tree.grid(row=5, column=0, columnspan=2)
 
         # ── BUTTONS ──
@@ -48,8 +49,8 @@ class SampleForm:
         if not name:
             messagebox.showerror("Error", "Enter name")
             return
-
         self.sample_controller.add_sample(name)
+        
         messagebox.showinfo("Success", "Added")
         self.patient_entry.delete(0, tk.END)
         self.load_samples()
@@ -60,7 +61,7 @@ class SampleForm:
         samples = self.sample_controller.get_all_samples()
         for s in samples:
             # Access as object properties
-            self.tree.insert("", "end", values=(s.sample_id, s.patient_name, s.status))
+            self.tree.insert("", "end", values=(s.sample_id, s.patient_name, s.status, s.date_added))
 
     def search(self):
         query = self.search_entry.get()
@@ -68,7 +69,7 @@ class SampleForm:
             self.tree.delete(row)
         results = self.sample_controller.search_samples_by_patient(query)
         for s in results:
-            self.tree.insert("", "end", values=(s.sample_id, s.patient_name, s.status))
+            self.tree.insert("", "end", values=(s.sample_id, s.patient_name, s.status, s.date_added))
 
     def filter(self):
         status = self.filter_combo.get()
@@ -81,7 +82,7 @@ class SampleForm:
             samples = self.sample_controller.get_samples_by_status(status)
 
         for s in samples:
-            self.tree.insert("", "end", values=(s.sample_id, s.patient_name, s.status))
+            self.tree.insert("", "end", values=(s.sample_id, s.patient_name, s.status, s.date_added))
 
     def get_selected_id(self):
         selected = self.tree.selection()
