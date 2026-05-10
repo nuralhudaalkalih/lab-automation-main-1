@@ -11,10 +11,17 @@ class AuthController:
 
     def register(self, username: str, password: str, role: str) -> bool:
         if not username or not password:
-            raise ValueError("Username and password cannot be empty")
-
+            raise ValueError("Username and password cannot be empty.")
+        
+        # password validation
+        if len(password)<8:
+            raise ValueError("Password must be at least 8 characters long.")
+        if not any(char.isupper() for char in password):
+            raise ValueError("Password must contain at least one uppercase letter.")
+        if not any(char.isalnum() for char in password):
+            raise ValueError("Password must contain at least one number or special character.")
         if self.dao.username_exists(username):
-            return False
+            raise ValueError("Username already exists.")
 
         return self.dao.add_user(username, password, role)
 

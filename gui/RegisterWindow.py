@@ -49,22 +49,30 @@ class RegisterWindow:
                   borderwidth=0, command=self.on_done).grid(row=6, column=0, columnspan=2)
 
     def register(self):
-        role = self.role.get()
+            role = self.role.get()
 
-        # Admin validation
-        if role == "Admin":
-            if self.admin_code.get() != "admin123":  
-                messagebox.showerror("Error", "Wrong admin code. Try again.")
-                return
+            # Admin validation
+            if role == "Admin":
+                if self.admin_code.get() != "admin123":  
+                    messagebox.showerror("Error", "Wrong admin code. Try again.")
+                    return
 
-        success = self.auth.register(
-            self.username.get(),
-            self.password.get(),
-            role
-        )
+            # Use try...except to catch the ValueError raised by AuthController
+            try:
+                result = self.auth.register(
+                    self.username.get(),
+                    self.password.get(),
+                    role
+                )
 
-        if success:
-            messagebox.showinfo("Success", "Account created")
-            self.on_done()
-        else:
-            messagebox.showerror("Error", "Username exists")
+                # If no exception was raised and the database returned True
+                if result:
+                    messagebox.showinfo("Success", "Account created")
+                    self.on_done()
+                else:
+                    # Fallback just in case the DAO returns False without raising an error
+                    messagebox.showerror("Error", "Failed to create account.")
+
+            except ValueError as e:
+                # Catch the ValueError and display the exact string passed to it
+                messagebox.showerror("Error", str(e))
