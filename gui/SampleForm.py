@@ -15,7 +15,6 @@ class SampleForm:
         self.patient_entry.grid(row=1, column=1)
         tk.Label(frame, text="Patient:", bg="#A8A8AD", font=("Arial",17)).grid(row=1, column=0)
         tk.Button(frame, text="Add Sample",width=20,font=("Arial",10), command=self.add_sample).grid(row=2, column=0, columnspan=2,pady=10)
-
         # ── SEARCH ──
         tk.Button(frame, text="Search", width=20, font=("Arial",10), command=self.search).grid(row=3, column=0,pady=5)
         self.search_entry = tk.Entry(frame, font=("Arial",12))
@@ -41,6 +40,9 @@ class SampleForm:
         tk.Button(frame, text="Home",width=20,font=("Arial",10), command=self.on_home).grid(row=6, column=1,pady=10)
         tk.Button(frame, text="Processing",width=20,font=("Arial",10), command=self.mark_processing).grid(row=7, column=0,pady=5)
         tk.Button(frame, text="Completed",width=20,font=("Arial",10), command=self.mark_completed).grid(row=7, column=1,pady=5)
+
+        # delete sample
+        tk.Button(frame, text="Delete Sample",width=20,font=("Arial",10), command=self.delete_sample).grid(row=8, column=0, columnspan=2,pady=10)
 
         self.load_samples()
 
@@ -102,4 +104,12 @@ class SampleForm:
         if not sample_id:
             return
         self.sample_controller.update_sample_status(sample_id, "Completed")
+        self.load_samples()
+
+    def delete_sample(self):
+        sample_id = self.get_selected_id()
+        if not sample_id:
+            return
+        self.sample_controller.delete_sample(sample_id)
+        messagebox.showinfo("Success", "Deleted")
         self.load_samples()
